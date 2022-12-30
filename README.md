@@ -1,0 +1,1 @@
+# kopring-jpa-skeleton
