@@ -1,0 +1,85 @@
+[versions]
+kotlin = "1.7.22"
+kotlin-logging = "2.1.23"
+spring = "5.3.24"
+spring-boot = "2.7.7"
+spring-data = "2.6.3"
+spring-dependency-management = "1.1.0"
+arrow = "1.1.3-alpha.41"
+detekt = "1.21.0"
+dokka = "1.7.10"
+kover = "0.5.1"
+h2 = "2.1.214"
+logback = "1.2.11"
+mysql = "8.0.28"
+querydsl = "5.0.0"
+prometheus = "1.8.4"
+spring-doc = "1.6.6"
+caffeine = "2.9.3"
+json-web-token = "0.11.2"
+
+[libraries]
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
+kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-logging = { module = "io.github.microutils:kotlin-logging", version.ref = "kotlin-logging" }
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
+# spring-boot
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
+spring-boot-starter-data-envers = { module = "org.springframework.data:spring-data-envers", version.ref = "spring-data" }
+spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+spring-boot-starter-cache = { module = "org.springframework.boot:spring-boot-starter-cache" }
+spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
+spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+spring-boot-configuration-processor = { module = "org.springframework.boot:spring-boot-configuration-processor" }
+spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools" }
+# database
+h2 = { module = "com.h2database:h2", version.ref = "h2" }
+mysql-connector = { module = "mysql:mysql-connector-java", version.ref = "mysql" }
+querydsl-jpa = { module = "com.querydsl:querydsl-jpa", version.ref = "querydsl" }
+querydsl-apt = { module = "com.querydsl:querydsl-apt", version.ref = "querydsl" }
+# tools
+detekt-gradle = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+dokka-core = { module = "org.jetbrains.dokka:dokka-core", version.ref = "dokka" }
+arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+prometheus = { module = "io.micrometer:micrometer-registry-prometheus", version.ref = "prometheus" }
+spring-doc-ui = { module = "org.springdoc:springdoc-openapi-ui", version.ref = "spring-doc" }
+spring-doc-kotlin = { module = "org.springdoc:springdoc-openapi-kotlin", version.ref = "spring-doc" }
+caffeine = { module = "com.github.ben-manes.caffeine:caffeine", version.ref = "caffeine" }
+json-web-token-api = { module = "io.jsonwebtoken:jjwt-api", version.ref = "json-web-token" }
+json-web-token-impl = { module = "io.jsonwebtoken:jjwt-impl", version.ref = "json-web-token" }
+json-web-token-jackson = { module = "io.jsonwebtoken:jjwt-jackson", version.ref = "json-web-token" }
+
+[bundles]
+spring-boot-web = ["spring-boot-starter-web",
+    "spring-boot-starter-actuator",
+    "spring-boot-starter-cache",
+    "spring-boot-starter-validation",
+    "spring-boot-starter-security"]
+spring-boot-data = ["spring-boot-starter-data-jpa",
+    "spring-boot-starter-actuator",
+    "spring-boot-starter-validation"]
+kotlin = ["kotlin-reflect",
+    "kotlin-stdlib-jdk8",
+    "kotlin-logging",
+    "jackson-module-kotlin"
+]
+json-web-token = ["json-web-token-api",
+    "json-web-token-impl",
+    "json-web-token-jackson"]
+spring-doc = ["spring-doc-ui",
+    "spring-doc-kotlin"]
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+springframework-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
