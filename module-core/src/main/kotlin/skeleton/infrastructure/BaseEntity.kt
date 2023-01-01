@@ -46,15 +46,16 @@ abstract class BaseEntity : Identifiable, Traceable {
 
     override fun equals(other: Any?): Boolean = other?.let {
         if (Hibernate.getClass(this) != Hibernate.getClass(it)) {
-            return false
-        }
-        when (other) {
-            is BaseEntity -> {
-                if (isNew && other.isNew) EntityHelper.transientEquals(this, other)
-                else id == other.id
-            }
+            false
+        } else {
+            when (other) {
+                is BaseEntity -> {
+                    if (isNew && other.isNew) EntityHelper.transientEquals(this, other)
+                    else id == other.id
+                }
 
-            else -> false
+                else -> false
+            }
         }
     } ?: false
 }
