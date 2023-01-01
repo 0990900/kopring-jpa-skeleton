@@ -1,6 +1,7 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import skeleton.setupDetekt
+import skeleton.setupKtlint
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
@@ -9,6 +10,7 @@ plugins {
     id(plugins.kotlin.jvm.pluginId) apply false
     id(plugins.kotlin.kapt.pluginId) apply false
     id(plugins.detekt.pluginId) apply false
+    id(plugins.ktlint.pluginId) apply false
     alias(plugins.springframework.boot) apply false
     alias(plugins.spring.dependency.management) apply false
     alias(plugins.kotlin.spring) apply false
@@ -26,7 +28,6 @@ configure(kopringProjects) {
     version = "0.0.1-SNAPSHOT"
 
     apply(plugin = plugins.kotlin.jvm.pluginId)
-    apply(plugin = plugins.detekt.pluginId)
     apply(plugin = plugins.springframework.boot.pluginId)
     apply(plugin = plugins.spring.dependency.management.pluginId)
     apply(plugin = plugins.kotlin.spring.pluginId)
@@ -70,6 +71,7 @@ configure(kopringProjects) {
     }
 
     setupDetekt()
+    setupKtlint()
 }
 
 allprojects {

@@ -42,12 +42,12 @@ interface Traceable {
 @Retention(AnnotationRetention.RUNTIME)
 annotation class IdentityColumn
 //
-//interface OptimisticLockSupport {
+// interface OptimisticLockSupport {
 //    var versionNo: Long
 //    fun versionUp(): Unit
-//}
+// }
 //
-//interface RangeManaged<R : Comparable<R>, D : Comparable<D>> {
+// interface RangeManaged<R : Comparable<R>, D : Comparable<D>> {
 //    fun getRange(): Pair<R, R>
 //
 //    val rangeToString: (R) -> String
@@ -77,9 +77,9 @@ annotation class IdentityColumn
 //            }
 //        }
 //    }
-//}
+// }
 //
-//interface OrderManaged {
+// interface OrderManaged {
 //    fun getManagedOrder(): Int
 //
 //    companion object {
@@ -106,4 +106,4 @@ annotation class IdentityColumn
 //            }
 //        }
 //    }
-//}
+// }
