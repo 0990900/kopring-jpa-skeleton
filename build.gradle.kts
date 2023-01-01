@@ -3,41 +3,44 @@ import skeleton.setupDetekt
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
+    val plugins = libs.plugins
     application
-    id(libs.plugins.kotlin.jvm.pluginId) apply false
-    id(libs.plugins.kotlin.kapt.pluginId) apply false
-    id(libs.plugins.detekt.pluginId) apply false
-    alias(libs.plugins.springframework.boot) apply false
-    alias(libs.plugins.spring.dependency.management) apply false
-    alias(libs.plugins.kotlin.spring) apply false
-    alias(libs.plugins.kotlin.jpa) apply false
-    alias(libs.plugins.dokka) apply false
-    alias(libs.plugins.kover) apply false
+    id(plugins.kotlin.jvm.pluginId) apply false
+    id(plugins.kotlin.kapt.pluginId) apply false
+    id(plugins.detekt.pluginId) apply false
+    alias(plugins.springframework.boot) apply false
+    alias(plugins.spring.dependency.management) apply false
+    alias(plugins.kotlin.spring) apply false
+    alias(plugins.kotlin.jpa) apply false
+    alias(plugins.dokka) apply false
+    alias(plugins.kover) apply false
 }
 
 val kopringProjects = listOf(project(":module-core"), project(":module-api"))
 
 configure(kopringProjects) {
+    val libs = rootProject.libs
+    val plugins = libs.plugins
     group = "kopring"
     version = "0.0.1-SNAPSHOT"
 
-    apply(plugin = rootProject.libs.plugins.kotlin.jvm.pluginId)
-    apply(plugin = rootProject.libs.plugins.detekt.pluginId)
-    apply(plugin = rootProject.libs.plugins.springframework.boot.pluginId)
-    apply(plugin = rootProject.libs.plugins.spring.dependency.management.pluginId)
-    apply(plugin = rootProject.libs.plugins.kotlin.spring.pluginId)
-    apply(plugin = rootProject.libs.plugins.dokka.pluginId)
-    apply(plugin = rootProject.libs.plugins.kover.pluginId)
+    apply(plugin = plugins.kotlin.jvm.pluginId)
+    apply(plugin = plugins.detekt.pluginId)
+    apply(plugin = plugins.springframework.boot.pluginId)
+    apply(plugin = plugins.spring.dependency.management.pluginId)
+    apply(plugin = plugins.kotlin.spring.pluginId)
+    apply(plugin = plugins.dokka.pluginId)
+    apply(plugin = plugins.kover.pluginId)
 
     @Suppress("UnstableApiUsage")
     dependencies {
         val api by configurations
         val developmentOnly by configurations
-        api(rootProject.libs.arrow.core)
-        api(rootProject.libs.bundles.kotlin)
-        api(rootProject.libs.logback.classic)
-        developmentOnly(rootProject.libs.spring.boot.devtools)
-        testFixtures(rootProject.libs.spring.boot.starter.test)
+        api(libs.arrow.core)
+        api(libs.bundles.kotlin)
+        api(libs.logback.classic)
+        developmentOnly(libs.spring.boot.devtools)
+        testFixtures(libs.spring.boot.starter.test)
     }
 
     tasks {
