@@ -30,9 +30,11 @@ object EntityHelper {
     }
 
     fun <T : Any> transientHashCode(t1: T, vararg otherGetters: (T) -> Any?): Int {
-        val values = extractGetter(t1)
-            .map { getter -> getter.call(t1) }
-            .run { this + otherGetters.map { getter -> getter.invoke(t1) } }
+        val values = extractGetter(t1).map { getter ->
+            getter.call(t1)
+        } + otherGetters.map { getter ->
+            getter.invoke(t1)
+        }
         @Suppress("SpreadOperator")
         return Objects.hash(*values.toTypedArray())
     }
