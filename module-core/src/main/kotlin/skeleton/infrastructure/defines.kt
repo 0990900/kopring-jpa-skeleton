@@ -15,10 +15,17 @@ interface Traceable {
 
     companion object {
         object Columns {
-            const val CREATED_AT = "created_at"
-            const val CREATED_BY = "created_by"
-            const val UPDATED_AT = "updated_at"
-            const val UPDATED_BY = "updated_by"
+            object Name {
+                const val CREATED_AT = "created_at"
+                const val CREATED_BY = "created_by"
+                const val UPDATED_AT = "updated_at"
+                const val UPDATED_BY = "updated_by"
+            }
+
+            object Length {
+                const val CREATED_BY = 100
+                const val UPDATED_BY = 100
+            }
         }
     }
 }

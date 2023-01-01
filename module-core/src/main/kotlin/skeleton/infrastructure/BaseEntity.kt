@@ -5,10 +5,8 @@ import org.springframework.data.annotation.CreatedBy
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
-import skeleton.infrastructure.Traceable.Companion.Columns.CREATED_AT
-import skeleton.infrastructure.Traceable.Companion.Columns.CREATED_BY
-import skeleton.infrastructure.Traceable.Companion.Columns.UPDATED_AT
-import skeleton.infrastructure.Traceable.Companion.Columns.UPDATED_BY
+import skeleton.infrastructure.Traceable.Companion.Columns.Length
+import skeleton.infrastructure.Traceable.Companion.Columns.Name
 import java.time.LocalDateTime
 import javax.persistence.Column
 import javax.persistence.EntityListeners
@@ -25,20 +23,20 @@ abstract class BaseEntity : Identifiable, Traceable {
     @field:[Id GeneratedValue(strategy = GenerationType.IDENTITY)]
     override var id: Long? = null
 
-    @field:[Column(name = CREATED_AT) CreatedDate]
+    @field:[Column(name = Name.CREATED_AT) CreatedDate]
     @get:[IdentityColumn]
     override var createdAt: LocalDateTime? = null
 
     @get:[IdentityColumn]
-    @field:[Column(name = CREATED_BY, length = 100) CreatedBy]
+    @field:[Column(name = Name.CREATED_BY, length = Length.CREATED_BY) CreatedBy]
     override var createdBy: String? = null
 
     @get:[IdentityColumn]
-    @field:[Column(name = UPDATED_AT) LastModifiedDate]
+    @field:[Column(name = Name.UPDATED_AT) LastModifiedDate]
     override var updatedAt: LocalDateTime? = null
 
     @get:[IdentityColumn]
-    @field:[Column(name = UPDATED_BY, length = 100) CreatedBy]
+    @field:[Column(name = Name.UPDATED_BY, length = Length.UPDATED_BY) CreatedBy]
     override var updatedBy: String? = null
 
     @get:Transient
