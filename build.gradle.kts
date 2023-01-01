@@ -1,3 +1,4 @@
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import skeleton.setupDetekt
 
@@ -62,9 +63,12 @@ configure(kopringProjects) {
                 includes = listOf("skeleton.*")
             }
         }
+
+        withType<DokkaTask> {
+            outputDirectory.set(rootDir.resolve("docs"))
+        }
     }
 
-    extra.set("dokka.outputDirectory", rootDir.resolve("docs"))
     setupDetekt()
 }
 
