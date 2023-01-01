@@ -44,6 +44,7 @@ abstract class BaseEntity : Identifiable, Traceable {
 
     override fun hashCode(): Int = this.id?.hashCode() ?: EntityHelper.transientHashCode(this)
 
+    @Suppress("NestedBlockDepth")
     override fun equals(other: Any?): Boolean = other?.let {
         if (Hibernate.getClass(this) != Hibernate.getClass(it)) {
             false
