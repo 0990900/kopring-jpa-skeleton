@@ -16,6 +16,7 @@ fun Project.setupDetekt() {
     }
 
     tasks.withType<Detekt>().configureEach {
+        // this.jvmTarget = "1.8"
         // exclude { "generated/ksp" in it.file.absolutePath }
         reports {
             html.required.set(true)
