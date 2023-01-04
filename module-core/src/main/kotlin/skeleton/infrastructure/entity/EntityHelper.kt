@@ -1,4 +1,4 @@
-package skeleton.infrastructure
+package skeleton.infrastructure.entity
 
 import java.util.Objects
 import kotlin.reflect.full.findAnnotation
