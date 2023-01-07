@@ -1,23 +1,22 @@
-package skeleton.infrastructure.request
+package skeleton.infrastructure.form
 
 import arrow.core.flatMap
 import arrow.core.zip
 import org.springframework.data.jpa.repository.JpaRepository
 import skeleton.infrastructure.entity.Identifiable
 
-abstract class RequestResolver3<
+abstract class FormResolver3<
     E : Identifiable,
     out R,
-    in CR,
-    in MR : ModifyRequest,
+    in CF,
+    in MF : ModificationForm,
     P1 : Identifiable,
     P2 : Identifiable,
     P3 : Identifiable> {
-    abstract fun E.toDto(): Result<R>
 
-    abstract fun CR.parentIds(): Result<Triple<Long, Long, Long>>
-    abstract fun MR.parentIds(): Result<Triple<Long?, Long?, Long?>>
-    fun CR.parents(
+    abstract fun CF.parentIds(): Result<Triple<Long, Long, Long>>
+    abstract fun MF.parentIds(): Result<Triple<Long?, Long?, Long?>>
+    fun CF.parents(
         repo: Triple<JpaRepository<P1, Long>, JpaRepository<P2, Long>, JpaRepository<P3, Long>>
     ): Result<Triple<P1, P2, P3>> = this.parentIds()
         .flatMap { (p1, p2, p3) ->
@@ -29,8 +28,8 @@ abstract class RequestResolver3<
                 ) { a, b, c -> Triple(a, b, c) }
         }
 
-    abstract fun CR.toEntity(parent: Triple<P1, P2, P3>): Result<E>
-    fun MR.toEntity(
+    abstract fun CF.toEntity(parent: Triple<P1, P2, P3>): Result<E>
+    fun MF.toEntity(
         entity: E,
         repo: Triple<JpaRepository<P1, Long>, JpaRepository<P2, Long>, JpaRepository<P3, Long>>
     ): Result<E> = runCatching { require(this.id == entity.id) }
@@ -46,5 +45,5 @@ abstract class RequestResolver3<
         .flatMap { this.modify(entity, it) }
         .map { entity }
 
-    abstract fun MR.modify(entity: E, parent: Triple<P1?, P2?, P3?>): Result<Unit>
+    abstract fun MF.modify(entity: E, parent: Triple<P1?, P2?, P3?>): Result<Unit>
 }

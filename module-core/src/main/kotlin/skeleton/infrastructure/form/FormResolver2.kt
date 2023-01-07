@@ -1,22 +1,21 @@
-package skeleton.infrastructure.request
+package skeleton.infrastructure.form
 
 import arrow.core.flatMap
 import arrow.core.zip
 import org.springframework.data.jpa.repository.JpaRepository
 import skeleton.infrastructure.entity.Identifiable
 
-abstract class RequestResolver2<
+abstract class FormResolver2<
     E : Identifiable,
     out R,
-    in CR,
-    in MR : ModifyRequest,
+    in CF,
+    in MF : ModificationForm,
     P1 : Identifiable,
     P2 : Identifiable> {
-    abstract fun E.toDto(): Result<R>
 
-    abstract fun CR.parentIds(): Result<Pair<Long, Long>>
-    abstract fun MR.parentIds(): Result<Pair<Long?, Long?>>
-    fun CR.parents(
+    abstract fun CF.parentIds(): Result<Pair<Long, Long>>
+    abstract fun MF.parentIds(): Result<Pair<Long?, Long?>>
+    fun CF.parents(
         repo: Pair<JpaRepository<P1, Long>, JpaRepository<P2, Long>>
     ): Result<Pair<P1, P2>> = this.parentIds()
         .flatMap { (p1, p2) ->
@@ -25,8 +24,8 @@ abstract class RequestResolver2<
                 .zip(runCatching { repo2.getReferenceById(p2) }) { a, b -> Pair(a, b) }
         }
 
-    abstract fun CR.toEntity(parent: Pair<P1, P2>): Result<E>
-    fun MR.toEntity(
+    abstract fun CF.toEntity(parent: Pair<P1, P2>): Result<E>
+    fun MF.toEntity(
         entity: E,
         repo: Pair<JpaRepository<P1, Long>, JpaRepository<P2, Long>>
     ): Result<E> = runCatching { require(this.id == entity.id) }
@@ -39,5 +38,5 @@ abstract class RequestResolver2<
         .flatMap { this.modify(entity, it) }
         .map { entity }
 
-    abstract fun MR.modify(entity: E, parent: Pair<P1?, P2?>): Result<Unit>
+    abstract fun MF.modify(entity: E, parent: Pair<P1?, P2?>): Result<Unit>
 }
