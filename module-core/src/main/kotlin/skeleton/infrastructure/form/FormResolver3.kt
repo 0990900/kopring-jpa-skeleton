@@ -7,7 +7,6 @@ import skeleton.infrastructure.entity.Identifiable
 
 abstract class FormResolver3<
     E : Identifiable,
-    out R,
     in CF,
     in MF : ModificationForm,
     P1 : Identifiable,
