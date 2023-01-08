@@ -2,6 +2,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import skeleton.setupDetekt
 import skeleton.setupKtlint
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
@@ -19,7 +20,10 @@ plugins {
     alias(plugins.kover) apply false
 }
 
-val kopringProjects = listOf(project(":module-core"), project(":module-api"))
+val kopringProjects = listOf(
+    project(":module-core"),
+    project(":module-jpa-core"),
+    project(":module-jpa-api"))
 
 configure(kopringProjects) {
     val libs = rootProject.libs
@@ -67,6 +71,10 @@ configure(kopringProjects) {
 
         withType<DokkaTask> {
             outputDirectory.set(rootDir.resolve("docs"))
+        }
+
+        withType<BootJar> {
+            enabled = false
         }
     }
 

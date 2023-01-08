@@ -4,17 +4,11 @@ plugins {
 }
 
 dependencies {
-    api(project(":module-core"))
+    api(project(":module-jpa-core"))
     api(libs.bundles.spring.boot.web)
     api(libs.prometheus)
     api(libs.bundles.spring.doc)
     api(libs.bundles.json.web.token)
     api(libs.caffeine)
     kapt(libs.spring.boot.configuration.processor)
-}
-
-tasks {
-    bootJar {
-        enabled = false
-    }
 }

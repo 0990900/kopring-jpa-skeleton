@@ -1,5 +1,5 @@
-rootProject.name = "kopring-jpa-skeleton"
-include(":module-core", ":module-api")
+rootProject.name = "kopring-skeleton"
+include(":module-core", ":module-jpa-core", ":module-jpa-api")
 
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
